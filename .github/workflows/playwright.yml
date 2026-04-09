@@ -29,8 +29,10 @@ jobs:
         uses: azure/login@v4
         with:
           creds: ${{ secrets.AZURE_CREDENTIALS }}
-
+          
       - name: Run Playwright tests
+        env:
+            PLAYWRIGHT_SERVICE_URL: ${{ vars.PLAYWRIGHT_SERVICE_URL}}
         run: npx playwright test --config=playwright.service.config.ts --workers=3
 
       - name: Upload Playwright test results
